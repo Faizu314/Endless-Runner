@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 44193242}
   - component: {fileID: 44193241}
+  - component: {fileID: 44193243}
   m_Layer: 0
   m_Name: Level Designer
   m_TagString: Untagged
@@ -228,15 +229,15 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 0.016371526
-        outSlope: 0.016371526
+        inSlope: 1.3933138
+        outSlope: 1.3933138
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.2970179
-        value: 0.0048626363
+        time: 0.10231575
+        value: 0.14255795
         inSlope: 0.030660575
         outSlope: 0.030660575
         tangentMode: 0
@@ -244,31 +245,40 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.102665514
       - serializedVersion: 3
-        time: 0.36433932
-        value: 0.26762566
-        inSlope: 1.1397406
-        outSlope: 1.1397406
+        time: 0.28885567
+        value: 0.14576161
+        inSlope: -0.019637486
+        outSlope: -0.019637486
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.17938821
+        outWeight: 1
+      - serializedVersion: 3
+        time: 0.30067113
+        value: 0.0028068423
+        inSlope: -0.0023853567
+        outSlope: -0.0023853567
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.69943917
-        value: 0.44531453
-        inSlope: 0.0017994992
-        outSlope: 0.0017994992
+        time: 0.7006882
+        value: 0.0020347154
+        inSlope: 0.015939983
+        outSlope: 0.015939983
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.17938821
-        outWeight: 0.22047614
+        inWeight: 0.33333334
+        outWeight: 0.23236339
       - serializedVersion: 3
-        time: 0.99734396
-        value: 0.44564947
-        inSlope: 0.029772796
-        outSlope: 0.029772796
+        time: 0.99868673
+        value: 0.14189276
+        inSlope: 0.19832656
+        outSlope: 0.19832656
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.41603792
+        inWeight: 0.21340387
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -289,6 +299,61 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &44193243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44193240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcdf4635e4d0b9d41bfd9fea0cd42264, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1171559132}
+  spawnees:
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -5.1999974, y: 0, z: 150.9997}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -6.799998, y: 0, z: 152.19997}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -3.5999987, y: 0, z: 152.40018}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 5.9999967, y: 0, z: 163.60007}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -4.799998, y: 0, z: 172.8002}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: 4.399998, y: 0, z: 165.20023}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: 7.599995, y: 0, z: 165.20023}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -6.3999963, y: 0, z: 174.4003}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -3.199999, y: 0, z: 174.4003}
+  data:
+  - enemyName: Minion
+    enemyIndex: 0
+    color: {r: 0, g: 0, b: 0, a: 0}
+    Draw: 1
+  - enemyName: Reaper
+    enemyIndex: 1
+    color: {r: 1, g: 0.9198113, b: 0.9198113, a: 0}
+    Draw: 1
+  Markers:
+  - 150
+  - 350
+  draw: 1
+  selectedSpawnee: 0
 --- !u!1 &139987193
 GameObject:
   m_ObjectHideFlags: 0

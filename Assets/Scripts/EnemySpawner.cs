@@ -53,20 +53,8 @@ public class EnemySpawner : MonoBehaviour
         }
     }
 
-    private void Update()
+    private void SpawnRandomCandidate()
     {
-        if (bossMode || player.transform.position.z > levelLength)
-            return;
-        x += Time.deltaTime;
-        if (x > 1)
-            x = Random.value;
-        else
-            return;
-
-        for (int i = 0; i < enemyDetails.Count; i++)
-            if (x <= enemyDetails[i].spawnRates.Evaluate(player.transform.position.z / levelLength))
-                candidates.Add(i);
-        
         if (candidates.Count == 0)
             return;
         int index = Random.Range(0, candidates.Count);
@@ -78,7 +66,24 @@ public class EnemySpawner : MonoBehaviour
         }
         else
             Spawn(candidates[index], new Vector3(Random.Range(-7f, 7f), 1.69f, player.transform.position.z + 40f));
-        candidates.Clear();
+        candidates.Remove(candidates[index]);
+    }
+
+    private void Update()
+    {
+        if (bossMode || player.transform.position.z > levelLength)
+            return;
+        SpawnRandomCandidate();
+
+        x += Time.deltaTime;
+        if (x > 1)
+            x = Random.value;
+        else
+            return;
+
+        for (int i = 0; i < enemyDetails.Count; i++)
+            if (x < enemyDetails[i].spawnRates.Evaluate(player.transform.position.z / levelLength))
+                candidates.Add(i);
 
         x = 0;
     }
