@@ -71,8 +71,13 @@ public class EnemySpawner : MonoBehaviour
 
     private void Update()
     {
-        if (bossMode || player.transform.position.z > levelLength)
+        if (bossMode)
             return;
+        if (player.transform.position.z > levelLength)
+        {
+            Debug.Log("Mubarakan muk gyeh level");
+            return;
+        }
         SpawnRandomCandidate();
 
         x += Time.deltaTime;

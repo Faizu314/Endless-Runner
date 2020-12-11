@@ -59,7 +59,7 @@ public class EnemyMovement : MonoBehaviour
         float zRotation = bobCurve.Evaluate(z);
 
         float rotationY = 180f;
-        if (Vector3.SqrMagnitude(transform.position - target.position) < 150)
+        if (Vector3.SqrMagnitude(transform.position - target.position) < 400)
         {
             Vector3 dir = (target.position - transform.position).normalized;
             rotationY = Mathf.Atan2(-dir.z, dir.x) * Mathf.Rad2Deg + 90f;

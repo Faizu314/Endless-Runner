@@ -6,39 +6,38 @@ using System.Collections.Generic;
 public class CustomEnemyPositionsEditor : Editor
 {
     CustomEnemyPositions CEP;
-    int x = 0;
-    int y = 0;
-    private string[] EnemyNames;
+    private string[] SpawneeNames;
     private string[] EnemyData;
-    bool isShiftDown = false;
+    int x = 0, y = 0;
+    private bool editModeEnabled = true;
 
     private void OnEnable()
     {
         CEP = (CustomEnemyPositions)target;
-        UpdateEnemyNames();
+        editModeEnabled = CEP.editModeEnabled;
+        UpdateEnemyData();
         UpdateSpawneeNames();
     }
 
     private void UpdateSpawneeNames()
     {
-        EnemyNames = new string[CEP.spawnees.Count];
+        SpawneeNames = new string[CEP.spawnees.Count];
         for (int i = 0; i < CEP.spawnees.Count; i++)
         {
-            EnemyNames[i] = CEP.spawnees[i].enemyName;
+            SpawneeNames[i] = CEP.spawnees[i].enemyName;
         }
     }
-    private void UpdateEnemyNames()
+    private void UpdateEnemyData()
     {
         EnemyData = new string[CEP.data.Count];
         for (int i = 0; i < CEP.data.Count; i++)
         {
             EnemyData[i] = CEP.data[i].enemyName;
-            if (i != CEP.data[i].enemyIndex)
-            {
-                Debug.Log("Enemy data is not sorted!");
-                break;
-            }
         }
+    }
+    private void UpdateSpawneePositions()
+    {
+        CEP.UpdateSpawneePositions();
     }
 
     public override void OnInspectorGUI()
@@ -55,7 +54,7 @@ public class CustomEnemyPositionsEditor : Editor
 
         if (GUILayout.Button("Update Enemy Data"))
         {
-            UpdateEnemyNames();
+            UpdateEnemyData();
         }
 
         if (GUILayout.Button("Update Spawnee Data"))
@@ -71,58 +70,33 @@ public class CustomEnemyPositionsEditor : Editor
         }
         if (GUILayout.Button("Remove Enemy"))
         {
-            CEP.RemoveEnemy(x);
+            CEP.RemoveEnemy(y);
             UpdateSpawneeNames();
         }
         GUILayout.EndHorizontal();
 
-        if (EnemyNames != null)
+        if (SpawneeNames != null)
         {
-            y = GUILayout.SelectionGrid(y, EnemyNames, 2);
+            y = GUILayout.SelectionGrid(y, SpawneeNames, 2);
             CEP.selectedSpawnee = y;
         }
 
-        var e = Event.current;
-        if (e.keyCode == KeyCode.LeftShift || e.keyCode == KeyCode.RightShift)
+        if (editModeEnabled)
         {
-            isShiftDown = true;
-        }
-        if (e.rawType == EventType.KeyUp && (e.keyCode == KeyCode.LeftShift || e.keyCode == KeyCode.RightShift))
-        {
-            isShiftDown = false;
-        }
-
-        if (e != null && e.keyCode == KeyCode.W)
-        {
-            if (isShiftDown)
+            UpdateSpawneePositions();
+            if (GUILayout.Button("Save Positions"))
             {
-                CEP.spawnees[y].MoveUp_();
+                CEP.SavePositions();
+                editModeEnabled = false;
             }
-            CEP.spawnees[y].MoveUp();
         }
-        if (e != null && e.keyCode == KeyCode.S)
+        else
         {
-            if (isShiftDown)
+            if (GUILayout.Button("Review Positions"))
             {
-                CEP.spawnees[y].MoveDown_();
+                CEP.ReviewPositions();
+                editModeEnabled = true;
             }
-            CEP.spawnees[y].MoveDown();
-        }
-        if (e != null && e.keyCode == KeyCode.A)
-        {
-            if (isShiftDown)
-            {
-                CEP.spawnees[y].MoveLeft_();
-            }
-            CEP.spawnees[y].MoveLeft();
-        }
-        if (e != null && e.keyCode == KeyCode.D)
-        {
-            if (isShiftDown)
-            {
-                CEP.spawnees[y].MoveRight_();
-            }
-            CEP.spawnees[y].MoveRight();
         }
     }
 }

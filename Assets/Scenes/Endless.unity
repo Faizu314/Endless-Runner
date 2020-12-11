@@ -165,33 +165,33 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.5
-        inSlope: 0.006816148
-        outSlope: 0.006816148
+        value: 0.8
+        inSlope: -0.0083781155
+        outSlope: -0.0083781155
         tangentMode: 34
         weightedMode: 0
         inWeight: 0
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.3009025
-        value: 0.502051
-        inSlope: 0.039040808
-        outSlope: 0.039040808
+        time: 0.22447121
+        value: 0.79811937
+        inSlope: -0.00813608
+        outSlope: -0.00813608
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 1
       - serializedVersion: 3
-        time: 0.30146083
-        value: 0.002345264
-        inSlope: 0.013960634
-        outSlope: 0.013960634
+        time: 0.2496827
+        value: 0.0023452642
+        inSlope: 0.028345905
+        outSlope: 0.028345905
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.16680044
       - serializedVersion: 3
-        time: 0.6995477
+        time: 0.6637201
         value: 0.0037314259
         inSlope: 0.015383798
         outSlope: 0.015383798
@@ -200,7 +200,7 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.21322687
       - serializedVersion: 3
-        time: 0.7002085
+        time: 0.6656626
         value: 0.49893826
         inSlope: -0.019243203
         outSlope: -0.019243203
@@ -211,8 +211,8 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 1
         value: 0.5
-        inSlope: 0.0035415865
-        outSlope: 0.0035415865
+        inSlope: 0.0031756468
+        outSlope: 0.0031756468
         tangentMode: 34
         weightedMode: 0
         inWeight: 0.33333334
@@ -229,42 +229,15 @@ MonoBehaviour:
       - serializedVersion: 3
         time: 0
         value: 0
-        inSlope: 1.3933138
-        outSlope: 1.3933138
-        tangentMode: 34
+        inSlope: 0.004638859
+        outSlope: 0.004638859
+        tangentMode: 0
         weightedMode: 0
         inWeight: 0
-        outWeight: 0.33333334
+        outWeight: 0.105997965
       - serializedVersion: 3
-        time: 0.10231575
-        value: 0.14255795
-        inSlope: 0.030660575
-        outSlope: 0.030660575
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.102665514
-      - serializedVersion: 3
-        time: 0.28885567
-        value: 0.14576161
-        inSlope: -0.019637486
-        outSlope: -0.019637486
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.17938821
-        outWeight: 1
-      - serializedVersion: 3
-        time: 0.30067113
-        value: 0.0028068423
-        inSlope: -0.0023853567
-        outSlope: -0.0023853567
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.7006882
-        value: 0.0020347154
+        time: 0.611821
+        value: 0.0010276353
         inSlope: 0.015939983
         outSlope: 0.015939983
         tangentMode: 0
@@ -272,14 +245,23 @@ MonoBehaviour:
         inWeight: 0.33333334
         outWeight: 0.23236339
       - serializedVersion: 3
-        time: 0.99868673
-        value: 0.14189276
-        inSlope: 0.19832656
-        outSlope: 0.19832656
+        time: 0.6561761
+        value: 0.7
+        inSlope: 0.001467412
+        outSlope: 0.001467412
         tangentMode: 0
         weightedMode: 0
-        inWeight: 0.21340387
-        outWeight: 0
+        inWeight: 0.33333334
+        outWeight: 0.14696446
+      - serializedVersion: 3
+        time: 1
+        value: 0.72
+        inSlope: 0.002768156
+        outSlope: 0.002768156
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.18595533
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
@@ -315,44 +297,224 @@ MonoBehaviour:
   spawnees:
   - enemyName: Minion
     enemyIndex: 0
-    position: {x: -5.1999974, y: 0, z: 150.9997}
+    position: {x: -5.13, y: 1.69, z: 168.63998}
+    dummy: {fileID: 0}
   - enemyName: Reaper
     enemyIndex: 1
-    position: {x: -6.799998, y: 0, z: 152.19997}
+    position: {x: -6.33, y: 1.69, z: 169.77998}
+    dummy: {fileID: 0}
   - enemyName: Reaper
     enemyIndex: 1
-    position: {x: -3.5999987, y: 0, z: 152.40018}
+    position: {x: -3.96, y: 1.69, z: 169.79999}
+    dummy: {fileID: 0}
   - enemyName: Minion
     enemyIndex: 0
-    position: {x: 5.9999967, y: 0, z: 163.60007}
+    position: {x: 5.0200005, y: 1.69, z: 177.11998}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: 3.8199995, y: 1.69, z: 178.25998}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: 6.1899996, y: 1.69, z: 178.27998}
+    dummy: {fileID: 0}
   - enemyName: Minion
     enemyIndex: 0
-    position: {x: -4.799998, y: 0, z: 172.8002}
+    position: {x: -3.17, y: 1.69, z: 185.08998}
+    dummy: {fileID: 0}
   - enemyName: Reaper
     enemyIndex: 1
-    position: {x: 4.399998, y: 0, z: 165.20023}
+    position: {x: -4.370001, y: 1.69, z: 186.22998}
+    dummy: {fileID: 0}
   - enemyName: Reaper
     enemyIndex: 1
-    position: {x: 7.599995, y: 0, z: 165.20023}
+    position: {x: -2.0000012, y: 1.69, z: 186.24998}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 2.8800008, y: 1.69, z: 194.65}
+    dummy: {fileID: 0}
   - enemyName: Reaper
     enemyIndex: 1
-    position: {x: -6.3999963, y: 0, z: 174.4003}
+    position: {x: 1.6800001, y: 1.69, z: 195.79}
+    dummy: {fileID: 0}
   - enemyName: Reaper
     enemyIndex: 1
-    position: {x: -3.199999, y: 0, z: 174.4003}
+    position: {x: 4.05, y: 1.69, z: 195.81}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -2.0299993, y: 1.69, z: 205.49998}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -3.23, y: 1.69, z: 206.63998}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -0.86000013, y: 1.69, z: 206.65999}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -3.58, y: 1.69, z: 227.12999}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 3.95, y: 1.69, z: 227.27998}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -2, y: 1.69, z: 225.4}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 2.49, y: 1.69, z: 225.63998}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 0.17000003, y: 1.69, z: 224.73999}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: 0.11000003, y: 1.69, z: 229.37999}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 3.97, y: 1.69, z: 263.83997}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 5.4700003, y: 1.69, z: 265.43}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 7.12, y: 1.69, z: 263.83}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 5.5699997, y: 1.69, z: 262.3}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: 5.51, y: 1.69, z: 263.75}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -5.2799997, y: 1.69, z: 277.65002}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -3.78, y: 1.69, z: 279.24}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -2.1299999, y: 1.69, z: 277.64}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -3.68, y: 1.69, z: 276.11005}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -3.74, y: 1.69, z: 277.56}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 2.53, y: 1.69, z: 290.83002}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 4.0299997, y: 1.69, z: 292.41998}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 5.6800003, y: 1.69, z: 290.82}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 4.13, y: 1.69, z: 289.29004}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: 4.0699997, y: 1.69, z: 290.74}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -3.0799997, y: 1.69, z: 304.49}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -1.5799997, y: 1.69, z: 306.07996}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 0.07000041, y: 1.69, z: 304.47998}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -1.48, y: 1.69, z: 302.95}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -1.5399997, y: 1.69, z: 304.39996}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -3.87, y: 1.69, z: 324.83997}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 3.66, y: 1.69, z: 324.99}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -2.29, y: 1.69, z: 323.11}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: 2.2, y: 1.69, z: 323.34998}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -0.119999945, y: 1.69, z: 322.44995}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -0.17999995, y: 1.69, z: 327.08997}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -7.1399994, y: 1.69, z: 249.68997}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -5.6399994, y: 1.69, z: 251.28}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -3.9899998, y: 1.69, z: 249.68}
+    dummy: {fileID: 0}
+  - enemyName: Minion
+    enemyIndex: 0
+    position: {x: -5.54, y: 1.69, z: 248.15}
+    dummy: {fileID: 0}
+  - enemyName: Reaper
+    enemyIndex: 1
+    position: {x: -5.6, y: 1.69, z: 249.6}
+    dummy: {fileID: 0}
   data:
   - enemyName: Minion
-    enemyIndex: 0
-    color: {r: 0, g: 0, b: 0, a: 0}
+    mat: {fileID: 2100000, guid: ec83eda40fb9a7c4b9ce35698522003a, type: 2}
     Draw: 1
   - enemyName: Reaper
-    enemyIndex: 1
-    color: {r: 1, g: 0.9198113, b: 0.9198113, a: 0}
+    mat: {fileID: 2100000, guid: da47d8489bbb3fb4186a9666e4abe8b1, type: 2}
     Draw: 1
   Markers:
   - 150
   - 350
   draw: 1
+  editModeEnabled: 0
   selectedSpawnee: 0
 --- !u!1 &139987193
 GameObject:
@@ -1451,7 +1613,7 @@ MonoBehaviour:
   player: {fileID: 653658929}
   light: {fileID: 446321652}
   batteryFill: {fileID: 2050143624}
-  batteryCapacity: 3
+  batteryCapacity: 3.51
   batteryRechargeRate: 2
 --- !u!1 &1462071921
 GameObject:
