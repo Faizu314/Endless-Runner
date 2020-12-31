@@ -12,7 +12,7 @@ public class EnemySpawner : MonoBehaviour
 
     private List<Queue<GameObject>> idlePools;
     private List<GameObject>[] activeEnemies;
-    List<int> candidates = new List<int>();
+    private List<int> candidates = new List<int>();
     private float x = 0f;
     private bool bossMode = false;
 
@@ -59,11 +59,7 @@ public class EnemySpawner : MonoBehaviour
             return;
         int index = Random.Range(0, candidates.Count);
         if (enemyDetails[candidates[index]].isBoss)
-        {
-            player.Stop();
-            Spawn(candidates[index], new Vector3(Random.Range(-10f, 10f), 1.69f, player.transform.position.z + 30f));
-            bossMode = true;
-        }
+            Spawn(candidates[index], new Vector3(0, 1.69f, player.transform.position.z + 40f));
         else
             Spawn(candidates[index], new Vector3(Random.Range(-7f, 7f), 1.69f, player.transform.position.z + 40f));
         candidates.Remove(candidates[index]);
@@ -73,7 +69,7 @@ public class EnemySpawner : MonoBehaviour
     {
         if (bossMode)
             return;
-        if (player.transform.position.z > levelLength)
+        if (Mathf.Abs(player.transform.position.z - levelLength) < 5)
         {
             Debug.Log("Mubarakan muk gyeh level");
             return;
@@ -116,6 +112,11 @@ public class EnemySpawner : MonoBehaviour
             Debug.LogError("Enemy pool of " + enemyDetails[index].enemyName + " depleted. Perhaps consider a bigger pool size");
             return;
         }
+        if (enemyDetails[index].isBoss)
+        {
+            player.Stop();
+            bossMode = true;
+        }
         GameObject obj = idlePools[index].Dequeue();
         activeEnemies[index].Add(obj);
         obj.transform.position = position;
@@ -125,6 +126,16 @@ public class EnemySpawner : MonoBehaviour
     public void DisableBossMode()
     {
         bossMode = false;
+    }
+
+    public List<GameObject> GetEnemyPrefabs()
+    {
+        return enemyPrefabs;
+    }
+
+    public int GetLevelLength()
+    {
+        return levelLength;
     }
 
     [System.Serializable] private struct EnemySpawnDetails

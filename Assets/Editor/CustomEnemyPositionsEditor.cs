@@ -1,14 +1,12 @@
 ﻿using UnityEditor;
 using UnityEngine;
-using System.Collections.Generic;
 
 [CustomEditor(typeof(CustomEnemyPositions))]
 public class CustomEnemyPositionsEditor : Editor
 {
     CustomEnemyPositions CEP;
-    private string[] SpawneeNames;
     private string[] EnemyData;
-    int x = 0, y = 0;
+    int x = 0;
     private bool editModeEnabled = true;
 
     private void OnEnable()
@@ -16,17 +14,8 @@ public class CustomEnemyPositionsEditor : Editor
         CEP = (CustomEnemyPositions)target;
         editModeEnabled = CEP.editModeEnabled;
         UpdateEnemyData();
-        UpdateSpawneeNames();
     }
 
-    private void UpdateSpawneeNames()
-    {
-        SpawneeNames = new string[CEP.spawnees.Count];
-        for (int i = 0; i < CEP.spawnees.Count; i++)
-        {
-            SpawneeNames[i] = CEP.spawnees[i].enemyName;
-        }
-    }
     private void UpdateEnemyData()
     {
         EnemyData = new string[CEP.data.Count];
@@ -57,29 +46,12 @@ public class CustomEnemyPositionsEditor : Editor
             UpdateEnemyData();
         }
 
-        if (GUILayout.Button("Update Spawnee Data"))
-        {
-            UpdateSpawneeNames();
-        }
-
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Add Enemy"))
         {
             CEP.AddEnemy(x);
-            UpdateSpawneeNames();
-        }
-        if (GUILayout.Button("Remove Enemy"))
-        {
-            CEP.RemoveEnemy(y);
-            UpdateSpawneeNames();
         }
         GUILayout.EndHorizontal();
-
-        if (SpawneeNames != null)
-        {
-            y = GUILayout.SelectionGrid(y, SpawneeNames, 2);
-            CEP.selectedSpawnee = y;
-        }
 
         if (editModeEnabled)
         {

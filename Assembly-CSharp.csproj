@@ -58,13 +58,15 @@
     <Compile Include="Assets\Scripts\GenerateLightTarget.cs" />
     <Compile Include="Assets\Scripts\SwipeControl.cs" />
     <Compile Include="Assets\Scripts\GenerateLightPath.cs" />
+    <Compile Include="Assets\Scripts\CustomFormations.cs" />
     <Compile Include="Assets\Scripts\EnemyMovement.cs" />
+    <Compile Include="Assets\Scripts\AhmedApproachPlayer.cs" />
+    <Compile Include="Assets\Scripts\CustomEnemyPositions.cs" />
     <Compile Include="Assets\Scripts\EndlessPath.cs" />
     <Compile Include="Assets\Scripts\EnemyCollision.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerCollision.cs" />
     <Compile Include="Assets\Scripts\EnemySpawner.cs" />
-    <Compile Include="Assets\Scripts\CustomEnemyPositions.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

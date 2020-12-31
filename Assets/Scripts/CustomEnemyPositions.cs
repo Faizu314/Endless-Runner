@@ -5,16 +5,16 @@ using System.Collections.Generic;
 public class CustomEnemyPositions : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
-    [HideInInspector] public List<Spawnee> spawnees;
-    public List<EnemyData> data;
-
+    [HideInInspector] [SerializeField] private List<Spawnee> spawnees;
     private EnemySpawner enemySpawner;
     private int currentEnemyIndex;
 
-    public List<float> Markers;
-    public bool draw;
     [HideInInspector] public bool editModeEnabled = true;
     [HideInInspector] public int selectedSpawnee = 0;
+    public List<EnemyData> data;
+    public List<float> Markers;
+    public bool draw;
+
 
     private void Awake()
     {
@@ -26,12 +26,15 @@ public class CustomEnemyPositions : MonoBehaviour
     private void Start()
     {
         enemySpawner = GetComponent<EnemySpawner>();
-        spawnees.Sort((p1,p2) => p1.position.z.CompareTo(p2.position.z));
+        if (spawnees != null)
+            spawnees.Sort((p1, p2) => p1.position.z.CompareTo(p2.position.z));
         currentEnemyIndex = 0;
     }
     
     private void Update()
     {
+        if (spawnees == null || spawnees.Count == 0)
+            return;
         if (spawnees[currentEnemyIndex].position.z - player.transform.position.z <= 40f)
         {
             RequestSpawn();
@@ -52,14 +55,19 @@ public class CustomEnemyPositions : MonoBehaviour
     public void ReviewPositions()
     {
         editModeEnabled = true;
-        for (int i = 0; i < spawnees.Count; i++)
+        if (spawnees != null)
         {
-            spawnees[i].EnableEditMode(data[spawnees[i].enemyIndex].mat);
+            for (int i = 0; i < spawnees.Count; i++)
+            {
+                spawnees[i].EnableEditMode(data[spawnees[i].enemyIndex].mat);
+            }
         }
     }
     public void SavePositions()
     {
         editModeEnabled = false;
+        if (spawnees == null)
+            return;
         for (int i = 0; i < spawnees.Count; i++)
         {
             spawnees[i].SavePos();
@@ -74,26 +82,29 @@ public class CustomEnemyPositions : MonoBehaviour
         int N = transform.childCount;
         for (int i = 0; i < N; i++)
         {
-            GameObject addition = transform.GetChild(i).gameObject;
+            GameObject currentChild = transform.GetChild(i).gameObject;
             string name = null;
-            int index = 0;
-            for (int x = 0; x < addition.name.Length; x++)
+            int index = -1;
+            for (int x = 0; x < currentChild.name.Length; x++) //get enemy name from gameObject.name
             {
-                if (addition.name[x] == ' ')
+                if (currentChild.name[x] == ' ')
                 {
-                    name = addition.name.Substring(0, x);
-                    x = addition.name.Length;
+                    name = currentChild.name.Substring(0, x);
+                    x = currentChild.name.Length;
                 }
-            }
-            for (int j = 0; j < data.Count; j++)
+            }          
+            for (int j = 0; j < data.Count; j++) //look for that enemy in data
             {
                 if (name == data[j].enemyName)
                 {
                     index = j;
                 }
             }
-            Spawnee temp = new Spawnee(name, index, data[index].mat, addition);
-            spawnees.Add(temp);
+            if (index != -1)
+            {
+                Spawnee temp = new Spawnee(name, index, data[index].mat, currentChild);
+                spawnees.Add(temp);
+            }
         }
         
         for (int i = spawnees.Count - N; i < spawnees.Count; i++)
@@ -103,7 +114,7 @@ public class CustomEnemyPositions : MonoBehaviour
     }
     public void UpdateSpawneePositions()
     {
-        if (!editModeEnabled)
+        if (!editModeEnabled || spawnees == null)
         {
             return;
         }
@@ -130,33 +141,6 @@ public class CustomEnemyPositions : MonoBehaviour
         spawnees.Add(enemy);
     }
 
-    public void RemoveEnemy(int spawneesIndex)
-    {
-        if (!editModeEnabled)
-        {
-            Debug.Log("Can only remove enemy in edit mode. Press 'Review Positions'");
-            return;
-        }
-        if (spawneesIndex >= spawnees.Count)
-        {
-            Debug.Log("Select an Enemy from the list of white boxes (not black) before deleting it?");
-            return;
-        }
-
-        if (spawnees[spawneesIndex].dummy == null)
-        {
-            Debug.Log("This enemy's dummy has been manually deleted. Save positions " +
-                "and then update spawnee data to reflect additions or removals of dummy gameobjects");
-        }
-        if (spawnees[spawneesIndex].dummy != null)
-        {
-            DestroyImmediate(spawnees[spawneesIndex].dummy);
-        }
-        spawnees.RemoveAt(spawneesIndex);
-
-        selectedSpawnee = 0;
-    }
-
     [System.Serializable] public class EnemyData
     {
         public string enemyName;
@@ -170,29 +154,26 @@ public class CustomEnemyPositions : MonoBehaviour
         public int enemyIndex;
         public Vector3 position;
         public GameObject dummy;
-        private Material mat;
 
-        public Spawnee(string EN, int EI, Material mat)
+        public Spawnee(string EnemyName, int EnemyIndex, Material mat)
         {
-            this.mat = mat;
             dummy = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-            dummy.name = EN + " Dummy";
+            dummy.name = EnemyName + " Dummy";
             dummy.GetComponent<MeshRenderer>().sharedMaterial = mat;
             position = new Vector3(0, 1.69f, 0);
             dummy.transform.position = position;
             dummy.transform.parent = GameObject.Find("Level Designer").transform;
-            enemyName = EN;
-            enemyIndex = EI;
+            enemyName = EnemyName;
+            enemyIndex = EnemyIndex;
         }
-        public Spawnee(string EN, int EI, Material mat, GameObject dumdum)
+        public Spawnee(string EnemyName, int EnemyIndex, Material mat, GameObject dumdum)
         {
-            this.mat = mat;
             dummy = dumdum;
-            dummy.name = EN + " Dummy";
+            dummy.name = EnemyName + " Dummy";
             dummy.GetComponent<MeshRenderer>().sharedMaterial = mat;
             position = dummy.transform.position;
-            enemyName = EN;
-            enemyIndex = EI;
+            enemyName = EnemyName;
+            enemyIndex = EnemyIndex;
         }
         public void UpdatePos()
         {
@@ -225,6 +206,9 @@ public class CustomEnemyPositions : MonoBehaviour
             Gizmos.color = Color.white;
             Gizmos.DrawLine(new Vector3(-10, 0, 0), new Vector3(-10, 0, 500));
             Gizmos.DrawLine(new Vector3(10, 0, 0), new Vector3(10, 0, 500));
+
+            if (spawnees == null)
+            return;
 
             Color temp = new Color(0, 0, 0);
             if (spawnees.Count != 0 && !editModeEnabled)
