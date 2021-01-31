@@ -4,16 +4,16 @@ public class EnemyCollision : MonoBehaviour
 {
     [SerializeField] private Material material;
     [SerializeField] private MeshRenderer meshRenderer;
-    [SerializeField] private float healthBar;
+    [SerializeField] private float health;
 
     private EnemySpawner enemySpawner;
     private EnemyMovement enemyMovement;
     private Material myCopyOfMaterial;
-    private float currentHealthBar;
+    private float currentHealth;
 
     private void Start()
     {
-        currentHealthBar = healthBar;
+        currentHealth = health;
         enemyMovement = GetComponent<EnemyMovement>();
         enemySpawner = GameObject.Find("Level Designer").GetComponent<EnemySpawner>();
         myCopyOfMaterial = new Material(material);
@@ -26,9 +26,9 @@ public class EnemyCollision : MonoBehaviour
     {
         if (other.CompareTag("Light"))
         {
-            currentHealthBar -= Time.deltaTime;
+            currentHealth -= Time.fixedDeltaTime * SwipeControl.playerDamage;
             myCopyOfMaterial.SetColor("_EmissionColor", Color.white);
-            if (currentHealthBar <= 0)
+            if (currentHealth <= 0)
                 InflictDeath();
         }
     }
@@ -41,7 +41,7 @@ public class EnemyCollision : MonoBehaviour
     private void InflictDeath()
     {
         myCopyOfMaterial.SetColor("_EmissionColor", Color.clear);
-        currentHealthBar = healthBar;
+        currentHealth = health;
         enemyMovement.ReportDeath();
         enemySpawner.Despawn(gameObject);
     }

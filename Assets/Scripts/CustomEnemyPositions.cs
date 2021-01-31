@@ -5,13 +5,13 @@ using System.Collections.Generic;
 public class CustomEnemyPositions : MonoBehaviour
 {
     [SerializeField] private PlayerMovement player;
-    [HideInInspector] [SerializeField] private List<Spawnee> spawnees;
+    [HideInInspector] public List<Spawnee> spawnees;
     private EnemySpawner enemySpawner;
     private int currentEnemyIndex;
 
     [HideInInspector] public bool editModeEnabled = true;
     [HideInInspector] public int selectedSpawnee = 0;
-    public List<EnemyData> data;
+    [HideInInspector] public List<EnemyDrawData> data;
     public List<float> Markers;
     public bool draw;
 
@@ -23,6 +23,7 @@ public class CustomEnemyPositions : MonoBehaviour
             Debug.Log("You forgot to save the enemy positions before playing");
         }
     }
+
     private void Start()
     {
         enemySpawner = GetComponent<EnemySpawner>();
@@ -55,6 +56,19 @@ public class CustomEnemyPositions : MonoBehaviour
     public void ReviewPositions()
     {
         editModeEnabled = true;
+
+        if (enemySpawner == null)
+            enemySpawner = GameObject.Find("Level Designer").GetComponent<EnemySpawner>();
+        data.Clear();
+        for (int i = 0; i < enemySpawner.enemyDetails.Count; i++)
+        {
+            EnemyDrawData edd = new EnemyDrawData();
+            edd.enemyName = enemySpawner.enemyDetails[i].enemyName;
+            edd.mat = enemySpawner.enemyDetails[i].enemyPrefab.GetComponentInChildren<MeshRenderer>().sharedMaterial;
+            edd.Draw = true;
+            data.Add(edd);
+        }
+
         if (spawnees != null)
         {
             for (int i = 0; i < spawnees.Count; i++)
@@ -63,6 +77,7 @@ public class CustomEnemyPositions : MonoBehaviour
             }
         }
     }
+
     public void SavePositions()
     {
         editModeEnabled = false;
@@ -102,7 +117,7 @@ public class CustomEnemyPositions : MonoBehaviour
             }
             if (index != -1)
             {
-                Spawnee temp = new Spawnee(name, index, data[index].mat, currentChild);
+                Spawnee temp = new Spawnee(name, index, data[index].mat, currentChild); //give the spawnee a reference to its object
                 spawnees.Add(temp);
             }
         }
@@ -112,6 +127,7 @@ public class CustomEnemyPositions : MonoBehaviour
             spawnees[i].SavePos();
         }
     }
+
     public void UpdateSpawneePositions()
     {
         if (!editModeEnabled || spawnees == null)
@@ -137,11 +153,11 @@ public class CustomEnemyPositions : MonoBehaviour
             return;
         }
 
-        Spawnee enemy = new Spawnee(data[dataIndex].enemyName, dataIndex, data[dataIndex].mat);
-        spawnees.Add(enemy);
+        Spawnee temp = new Spawnee(data[dataIndex].enemyName, dataIndex, data[dataIndex].mat);
+        spawnees.Add(temp);
     }
 
-    [System.Serializable] public class EnemyData
+    [System.Serializable] public class EnemyDrawData
     {
         public string enemyName;
         public Material mat;

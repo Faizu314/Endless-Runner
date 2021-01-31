@@ -1,0 +1,90 @@
+I CAN'T SEE WHEN THE POWERUPS ARE ACTIVE!!!!  Read Section 7
+
+A SHIT TON OF ENEMIES CAME OUT OF NOWHERE IN THE START!!    Read Section 1
+
+YOU TRIED USING CustomEnemyPositions AND SOMETHING BAD HAPPENED!!   Read Section 5
+
+YOU DON'T GET HOW BIOMES WORK!!!    Read Section 2
+
+YOU DON'T GET WHAT A BiomeSectorManager IS!!!  Read Section 2.1
+
+YOU DON'T GET WHAT THAT TickPeriod VARIABLE IS!!!    Read Section 2.2
+
+YOU HAD A SHIT GAMING EXPERIENCE!!!    Read Section 3
+
+WHAT THE HELL IS THAT MODE IN CustomFormations!!!   Read Section 4
+
+THE CHECKPOINT SYSTEM IS NOT SAVING!!!!   Read Section 6
+
+
+/////////////////////////////Section 1////////////////////////////
+
+If you are making a new biomes all the components attached to that
+GameObject MUST BE DISABLED. (Just like those of Savanna)
+
+/////////////////////////////Section 2////////////////////////////
+
+Each Biome is represented by one GameObject that contains pairs of
+scripts representing the sectors of that biome.
+Adding a new Biome with its own pallete of enemies and formations
+is now as simple as making that new GameObject, creating the
+formations of each section and done!
+
+/////////////////////////////Section 2.1//////////////////////////
+
+Each BiomeSectorManager is connected to its own CustomFormations
+script which holds the formations that will spawn in that sector
+of that biome. Each Sector can be of four types:
+
+Transitional; This Sector will begin the next sector it is assigned
+after its length has been traversed by the player.
+
+Last; Upon the end of this Sector it will notify the EnemySpawner
+that this biome has finished.
+
+Transitional/Last_Boss; These biomes behave the same way only they
+will spawn their boss mob before ending.
+
+/////////////////////////////Section 2.2//////////////////////////
+
+The tickPeriod is a variable in CustomFormations which is the time
+elapsed between everytime it checks to spawn a formation. In other
+words the tickPeriod is the minimum amount of time between two
+consecutive formations.(And has a massive impact on difficulty)
+
+/////////////////////////////Section 3/////////////////////////////////
+
+Our game currently has a very noob profiling issue... Each frame it
+waits TWENTY EIGHT milliseconds for a thread to finish.
+Its in PostLateUpdate.FinishFrameRendering. I know it has something
+to do with rendering :p but idk wth it is. But hey if you can fix
+that the remaining code is taking like 5-8 ms not even kidding.
+
+/////////////////////////////Section 4/////////////////////////////////
+
+CustomFormations script serves two purposes, for random generation in
+Biomes and for Sequencial waves when attached to a boss.
+Random mode is pretty self explanatory.
+When attached to a boss set the mode to sequencial. When you are
+editing a formation you can add it to the sequence before saving. This
+will store the relative position of that formation to player and its
+index. Then the boss spawns each wave in the sequence one by one.
+
+/////////////////////////////Section 5/////////////////////////////////
+
+CustomEnemyPositions is now deprecated, DO NOT USE IT ANYWHERE.
+CustomFormations can pretty much do what it did and I didn't wanna
+delete it cuz it took alot of hardwork ;(
+
+//////////////////////////////Section 6////////////////////////////////
+
+It is saving... Currently our game has difficulty progression in a
+Biome cuz you can have different enemies in different Sectors and so on.
+But outside of Biomes there is no progression, the enemySpawner just
+picks a random Biome and initializes its first sector.
+In conclusion no matter how far you are in the game it will look the same.
+
+//////////////////////////////Section 7////////////////////////////////
+
+oh i didnt add that yet. currently the player has no way of knowing which
+powerup is active.

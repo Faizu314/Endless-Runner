@@ -1,28 +1,33 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 //My current solution is [HideInInspector] [SerializeField] but y doesnt it work without the serialize tag tho
 
 public class CustomFormations : MonoBehaviour
 {
-    public List<MemberData> memberData;
+    public enum Mode { Random, Sequence };
+    public Mode mode;
+
     [HideInInspector] [SerializeField] private List<Formation> formations; //If this is not serialized its data will reset on play
-    [HideInInspector] public List<int> openedFormations;
+    [HideInInspector] public List<MemberData> memberData = new List<MemberData>();
+    [HideInInspector] public List<int> openedFormations = new List<int>();
+    [HideInInspector] public float tickPeriod;
     [HideInInspector] public bool editModeEnabled;
-    public bool randomGeneration;
-
-
     [SerializeField] private List<FormationSpawnDetails> formationSpawnRates;
+    public List<SequenceData> waveSequence;
+    
     private List<int> candidates;
     private EnemySpawner enemySpawner;
     private Transform player;
+    private Action notifyLastWave;
     private float x = 0;
-    private int levelLength;
+    private int next;
 
     private void Awake()
     {
         if (editModeEnabled)
-            Debug.Log("You forgot to save the formations before playing");
+            Debug.Log("You forgot to save the formations. Object name: " + name);
     }
 
     private void Start()
@@ -30,46 +35,73 @@ public class CustomFormations : MonoBehaviour
         candidates = new List<int>();
         enemySpawner = GameObject.Find("Level Designer").GetComponent<EnemySpawner>();
         player = GameObject.Find("Player").transform;
-        levelLength = enemySpawner.GetLevelLength();
+        if (mode == Mode.Random)
+            next = -1;
+        else
+            next = 0;
     }
 
     private void SpawnRandomCandidate()
     {
         if (candidates.Count == 0)
             return;
-        int index = Random.Range(0, candidates.Count);
+        int index = UnityEngine.Random.Range(0, candidates.Count);
         List<Member> spawnees = formations[candidates[index]].GetMembers();
         Vector2 range = formationSpawnRates[candidates[index]].xRange;
-        float xCor = Random.Range(range.x, range.y);
+        float xCor = UnityEngine.Random.Range(range.x, range.y);
         Vector3 basePosition = new Vector3(xCor, 1.69f, player.position.z + 40);
         foreach (Member spawnee in spawnees)
         {
             enemySpawner.Spawn(spawnee.enemyIndex, basePosition + spawnee.position);
         }
-        candidates.RemoveAt(index);
+        candidates.Clear();
     }
 
     private void Update()
     {
-        if (!randomGeneration)
+        if (formations == null || formations.Count == 0)
             return;
-        if (formations == null)
+        if (mode == Mode.Sequence)
+        {
+            if (next == waveSequence.Count)
+            {
+                notifyLastWave();
+                next = 0;
+            }
+            return;
+        }
+        if (enemySpawner.bossMode)
             return;
         SpawnRandomCandidate();
         x += Time.deltaTime;
-        if (x > 1)
-            x = Random.value;
+        if (x > tickPeriod)
+            x = UnityEngine.Random.value;
         else
             return;
         for (int i = 0; i < formationSpawnRates.Count; i++)
-            if (x < formationSpawnRates[i].spawnRates.Evaluate(player.transform.position.z / levelLength))
+            if (x < formationSpawnRates[i].spawnRate)
                 candidates.Add(i);
+        x = 0;
+    }
+
+    public void NextFormation(Action notifyLastWave)
+    {
+        if (mode == Mode.Random)
+            return;
+        this.notifyLastWave = notifyLastWave;
+        List<Member> spawnees = formations[waveSequence[next].formationIndex].GetMembers();
+        Vector3 basePosition = player.position + waveSequence[next].relativePosition;
+        foreach (Member spawnee in spawnees)
+        {
+            enemySpawner.Spawn(spawnee.enemyIndex, basePosition + spawnee.position);
+        }
+        next++;
     }
 
     //Editor Code
     public void ConnectToSpawner()
     {
-        if (!randomGeneration)
+        if (mode == Mode.Sequence)
             return;
         if (editModeEnabled)
         {
@@ -77,18 +109,12 @@ public class CustomFormations : MonoBehaviour
             return;
         }
         if (formationSpawnRates == null)
-            return;
+            formationSpawnRates = new List<FormationSpawnDetails>();
+        formationSpawnRates.Clear();
         for (int i = 0; i < formations.Count; i++)
         {
-            if (i >= formationSpawnRates.Count)
-            {
-                FormationSpawnDetails temp = new FormationSpawnDetails(formations[i].name, formations[i].GetRange());
-            }
-            else
-            {
-                formationSpawnRates[i].formationName = formations[i].name;
-                formationSpawnRates[i].xRange = formations[i].GetRange();
-            }
+            FormationSpawnDetails temp = new FormationSpawnDetails(formations[i].name, formations[i].GetRange());
+            formationSpawnRates.Add(temp);
         }
     }
 
@@ -138,17 +164,18 @@ public class CustomFormations : MonoBehaviour
             return;
         foreach (int formationIndex in openedFormations)
         {
-            formations[formationIndex].UpdateRelativePositions();
+            formations[formationIndex].UpdateMemberRelativePositions();
         }
     }
 
     public void UpdateEnemyData()
     {
         memberData.Clear();
-        CustomEnemyPositions CEP = GameObject.Find("Level Designer").GetComponent<CustomEnemyPositions>();
-        for (int i = 0; i < CEP.data.Count; i++)
+        EnemySpawner enemySpawner = GameObject.Find("Level Designer").GetComponent<EnemySpawner>();
+        for (int i = 0; i < enemySpawner.enemyDetails.Count; i++)
         {
-            MemberData temp = new MemberData(CEP.data[i].enemyName, CEP.data[i].mat);
+            MemberData temp = new MemberData(enemySpawner.enemyDetails[i].enemyName, 
+                enemySpawner.enemyDetails[i].enemyPrefab.GetComponentInChildren<MeshRenderer>().sharedMaterial);
             memberData.Add(temp);
         }
     }
@@ -225,6 +252,14 @@ public class CustomFormations : MonoBehaviour
             return;
         }
         formations[formationIndex].AddMember(memberData[enemyIndex].memberName, enemyIndex, memberData[enemyIndex].mat);
+    }
+
+    public void AddToSequence(int formationIndex)
+    {
+        SequenceData sd = new SequenceData(formationIndex, formations[formationIndex].GetRelativePosition());
+        if (waveSequence == null)
+            waveSequence = new List<SequenceData>();
+        waveSequence.Add(sd);
     }
 
     [System.Serializable] public class MemberData
@@ -327,7 +362,7 @@ public class CustomFormations : MonoBehaviour
             Member member = new Member(enemyName, enemyIndex, mat, me);
             members.Add(member);
         }
-        public void UpdateRelativePositions()
+        public void UpdateMemberRelativePositions()
         {
             if (isSaved)
                 return;
@@ -386,19 +421,40 @@ public class CustomFormations : MonoBehaviour
         {
             return members;
         }
+        public Vector3 GetRelativePosition()
+        {
+            GameObject player = GameObject.Find("Player");
+            if (player == null)
+            {
+                Debug.Log("Player not found, relative position will not be saved");
+                return Vector3.zero;
+            }
+            return me.position - player.transform.position;
+        }
     }
 
     [System.Serializable] public class FormationSpawnDetails
     {
         public string formationName;
-        public AnimationCurve spawnRates;
+        [Range(0, 1)] public float spawnRate;
         [HideInInspector] public Vector2 xRange;
 
         public FormationSpawnDetails(string formationName, Vector2 xRange)
         {
             this.formationName = formationName;
-            spawnRates = new AnimationCurve();
             this.xRange = xRange;
+        }
+    }
+
+    [System.Serializable] public class SequenceData
+    {
+        public int formationIndex;
+        public Vector3 relativePosition;
+
+        public SequenceData(int formationIndex, Vector3 relativePosition)
+        {
+            this.formationIndex = formationIndex;
+            this.relativePosition = relativePosition;
         }
     }
 }

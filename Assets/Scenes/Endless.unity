@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 1853791753}
+  m_LightingSettings: {fileID: 0}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -133,8 +133,6 @@ GameObject:
   m_Component:
   - component: {fileID: 44193242}
   - component: {fileID: 44193241}
-  - component: {fileID: 44193243}
-  - component: {fileID: 44193244}
   m_Layer: 0
   m_Name: Level Designer
   m_TagString: Untagged
@@ -155,138 +153,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1171559132}
-  levelLength: 500
-  enemyPrefabs:
-  - {fileID: 7848260559213715289, guid: f296e17778747f8408aba3b6456f9f6b, type: 3}
-  - {fileID: 7848260559213715289, guid: 95ca40e50d77fa244b4e4e68c597ff98, type: 3}
-  - {fileID: 5730661615070468020, guid: d3835b48a6b8f454fae9c6b22550b367, type: 3}
+  biomes:
+  - {fileID: 710440547}
   enemyDetails:
   - enemyName: Minion
-    spawnRates:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.22447121
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 1
-        weightedMode: 1
-        inWeight: 0.33333334
-        outWeight: 0.18434581
-      - serializedVersion: 3
-        time: 0.24246654
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 0.6637201
-        value: 0
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.21322687
-      - serializedVersion: 3
-        time: 0.6656626
-        value: 0.49893826
-        inSlope: -0.019243203
-        outSlope: -0.019243203
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.23092003
-      - serializedVersion: 3
-        time: 1
-        value: 0.5
-        inSlope: 0.0031756468
-        outSlope: 0.0031756468
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+    enemyPrefab: {fileID: 7848260559213715289, guid: f296e17778747f8408aba3b6456f9f6b, type: 3}
     preferredPoolSize: 20
     isBoss: 0
   - enemyName: Reaper
-    spawnRates:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0.004638859
-        outSlope: 0.004638859
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.105997965
-      - serializedVersion: 3
-        time: 0.611821
-        value: 0.0010276353
-        inSlope: 0.015939983
-        outSlope: 0.015939983
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.23236339
-      - serializedVersion: 3
-        time: 0.6561761
-        value: 0.7
-        inSlope: 0.001467412
-        outSlope: 0.001467412
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.14696446
-      - serializedVersion: 3
-        time: 1
-        value: 0.72
-        inSlope: 0.002768156
-        outSlope: 0.002768156
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.18595533
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+    enemyPrefab: {fileID: 7848260559213715289, guid: 95ca40e50d77fa244b4e4e68c597ff98, type: 3}
     preferredPoolSize: 10
     isBoss: 0
   - enemyName: Boss Ahmed
-    spawnRates:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0
-        inSlope: 0.015939983
-        outSlope: 0.015939983
-        tangentMode: 0
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0.23236339
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
+    enemyPrefab: {fileID: 5730661615070468020, guid: d3835b48a6b8f454fae9c6b22550b367, type: 3}
     preferredPoolSize: 1
     isBoss: 1
+  bossMode: 0
 --- !u!4 &44193242
 Transform:
   m_ObjectHideFlags: 0
@@ -295,152 +177,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 44193240}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.59, y: 0, z: 13.62}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &44193243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44193240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcdf4635e4d0b9d41bfd9fea0cd42264, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1171559132}
-  spawnees: []
-  editModeEnabled: 0
-  selectedSpawnee: 0
-  data:
-  - enemyName: Minion
-    mat: {fileID: 2100000, guid: ec83eda40fb9a7c4b9ce35698522003a, type: 2}
-    Draw: 1
-  - enemyName: Reaper
-    mat: {fileID: 2100000, guid: da47d8489bbb3fb4186a9666e4abe8b1, type: 2}
-    Draw: 1
-  - enemyName: Boss Ahmed
-    mat: {fileID: 2100000, guid: 00357f7065701db4cb122196a7766ac7, type: 2}
-    Draw: 1
-  Markers:
-  - 150
-  - 350
-  draw: 1
---- !u!114 &44193244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 44193240}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 592ee6a37e3ebd744a6120f8863cf853, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  memberData:
-  - memberName: Minion
-    mat: {fileID: 2100000, guid: ec83eda40fb9a7c4b9ce35698522003a, type: 2}
-  - memberName: Reaper
-    mat: {fileID: 2100000, guid: da47d8489bbb3fb4186a9666e4abe8b1, type: 2}
-  - memberName: Boss Ahmed
-    mat: {fileID: 2100000, guid: 00357f7065701db4cb122196a7766ac7, type: 2}
-  formations:
-  - name: Tri
-    members:
-    - enemyName: Minion
-      enemyIndex: 0
-      position: {x: 0.889, y: 0, z: 0}
-      dummy: {fileID: 0}
-    - enemyName: Minion
-      enemyIndex: 0
-      position: {x: -0.959, y: 0, z: 0}
-      dummy: {fileID: 0}
-    - enemyName: Minion
-      enemyIndex: 0
-      position: {x: 0, y: 0, z: -0.786}
-      dummy: {fileID: 0}
-    isSaved: 1
-  - name: Quad
-    members:
-    - enemyName: Minion
-      enemyIndex: 0
-      position: {x: -0.794, y: 0, z: 0}
-      dummy: {fileID: 0}
-    - enemyName: Minion
-      enemyIndex: 0
-      position: {x: 0, y: 0, z: -0.985}
-      dummy: {fileID: 0}
-    - enemyName: Minion
-      enemyIndex: 0
-      position: {x: 0, y: 0, z: 0.972}
-      dummy: {fileID: 0}
-    - enemyName: Minion
-      enemyIndex: 0
-      position: {x: 0.863, y: 0, z: 0}
-      dummy: {fileID: 0}
-    isSaved: 1
-  openedFormations: 
-  editModeEnabled: 0
-  randomGeneration: 1
-  formationSpawnRates:
-  - formationName: Tri
-    spawnRates:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 0.1
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    xRange: {x: -9.041, y: 9.111}
-  - formationName: Quad
-    spawnRates:
-      serializedVersion: 2
-      m_Curve:
-      - serializedVersion: 3
-        time: 0
-        value: 0.05
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0
-        outWeight: 0.33333334
-      - serializedVersion: 3
-        time: 1
-        value: 0.05
-        inSlope: 0
-        outSlope: 0
-        tangentMode: 34
-        weightedMode: 0
-        inWeight: 0.33333334
-        outWeight: 0
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 0
-    xRange: {x: -9.206, y: 9.137}
 --- !u!1 &139987193
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,54 +215,6 @@ Transform:
   - {fileID: 1560463340}
   m_Father: {fileID: 653658929}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &321592622
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 321592624}
-  - component: {fileID: 321592623}
-  m_Layer: 8
-  m_Name: Testing Post Processing
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &321592623
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321592622}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 4fadcab6f10085b40813f6a8dea1f101, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
---- !u!4 &321592624
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321592622}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5.980787, y: -10.841922, z: 14.088166}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &446321652
 GameObject:
@@ -565,7 +259,6 @@ GameObject:
   - component: {fileID: 534801552}
   - component: {fileID: 534801555}
   - component: {fileID: 534801554}
-  - component: {fileID: 534801553}
   m_Layer: 0
   m_Name: Light Case
   m_TagString: Untagged
@@ -587,20 +280,6 @@ Transform:
   m_Father: {fileID: 139987194}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!136 &534801553
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534801551}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &534801554
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -730,6 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81d2d7f1b02c89459cc0b41b7b28d39, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toLoad: Menu
 --- !u!54 &664860623
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -769,7 +449,7 @@ MeshRenderer:
   m_GameObject: {fileID: 664860620}
   m_Enabled: 1
   m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -809,6 +489,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 664860620}
   m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &703175248
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 703175249}
+  - component: {fileID: 703175250}
+  m_Layer: 0
+  m_Name: Powerups Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &703175249
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703175248}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &703175250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703175248}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82f77eb78a903d4489a7eadfe32a87dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerups:
+  - name: Infinite Battery
+    prefab: {fileID: 8050340882427610377, guid: 6d6c3c69450d9de47a8c8446b22902aa, type: 3}
+    spawnRate: 0.1
+    poolSize: 3
+  - name: Longer Range
+    prefab: {fileID: 2218067240021762215, guid: 447e4c4818b47f54e959b1370582e4ee, type: 3}
+    spawnRate: 0.1
+    poolSize: 3
+  - name: More Damage
+    prefab: {fileID: 6002920809182452460, guid: 6a932102ec80f4442a11a24b21b45ce3, type: 3}
+    spawnRate: 0.2
+    poolSize: 3
+  player: {fileID: 1171559131}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -844,7 +581,7 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
+    m_Type: 1
     m_Resolution: 3
     m_CustomResolution: -1
     m_Strength: 1
@@ -877,7 +614,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -885,6 +622,7 @@ Light:
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &705507995
@@ -901,6 +639,178 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 81.748, y: -30, z: 0}
+--- !u!1 &710440542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 710440543}
+  - component: {fileID: 710440547}
+  - component: {fileID: 710440546}
+  - component: {fileID: 710440545}
+  - component: {fileID: 710440544}
+  m_Layer: 0
+  m_Name: Savanna
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &710440543
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710440542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1144908470}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &710440544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710440542}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592ee6a37e3ebd744a6120f8863cf853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 0
+  formations:
+  - name: Reaper Solo
+    members:
+    - enemyName: Reaper
+      enemyIndex: 1
+      position: {x: 0, y: 0, z: 0.39}
+      dummy: {fileID: 0}
+    isSaved: 1
+  - name: Reaper Duo
+    members:
+    - enemyName: Reaper
+      enemyIndex: 1
+      position: {x: 4.95, y: 0, z: 2.98}
+      dummy: {fileID: 0}
+    - enemyName: Reaper
+      enemyIndex: 1
+      position: {x: -4.56, y: 0, z: 2.92}
+      dummy: {fileID: 0}
+    isSaved: 1
+  memberData:
+  - memberName: Minion
+    mat: {fileID: 2100000, guid: ec83eda40fb9a7c4b9ce35698522003a, type: 2}
+  - memberName: Reaper
+    mat: {fileID: 2100000, guid: da47d8489bbb3fb4186a9666e4abe8b1, type: 2}
+  - memberName: Boss Ahmed
+    mat: {fileID: 2100000, guid: 00357f7065701db4cb122196a7766ac7, type: 2}
+  openedFormations: 
+  tickPeriod: 0
+  editModeEnabled: 0
+  formationSpawnRates:
+  - formationName: Reaper Trio
+    spawnRate: 0.194
+    xRange: {x: -3, y: 3}
+  - formationName: Reaper Duo
+    spawnRate: 0.399
+    xRange: {x: -5.44, y: 5.05}
+  waveSequence: []
+--- !u!114 &710440545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710440542}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db91847d27f9b7e45bcaeb1f261bd037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorName: Sparse Beasts
+  myFormations: {fileID: 710440544}
+  myBossIndex: 2
+  nextSector: {fileID: 0}
+  tickPeriod: 1.5
+  sectorLength: 400
+  position: 3
+--- !u!114 &710440546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710440542}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 592ee6a37e3ebd744a6120f8863cf853, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mode: 0
+  formations:
+  - name: Solo Minion
+    members:
+    - enemyName: Minion
+      enemyIndex: 0
+      position: {x: 0, y: 0, z: 0}
+      dummy: {fileID: 0}
+    isSaved: 1
+  - name: Duo Minions
+    members:
+    - enemyName: Minion
+      enemyIndex: 0
+      position: {x: -6, y: 0, z: 0}
+      dummy: {fileID: 0}
+    - enemyName: Minion
+      enemyIndex: 0
+      position: {x: 6, y: 0, z: 0}
+      dummy: {fileID: 0}
+    isSaved: 1
+  memberData:
+  - memberName: Minion
+    mat: {fileID: 2100000, guid: ec83eda40fb9a7c4b9ce35698522003a, type: 2}
+  - memberName: Reaper
+    mat: {fileID: 2100000, guid: da47d8489bbb3fb4186a9666e4abe8b1, type: 2}
+  - memberName: Boss Ahmed
+    mat: {fileID: 2100000, guid: 00357f7065701db4cb122196a7766ac7, type: 2}
+  openedFormations: 
+  tickPeriod: 0
+  editModeEnabled: 0
+  formationSpawnRates:
+  - formationName: Solo Minion
+    spawnRate: 0.405
+    xRange: {x: -10, y: 10}
+  - formationName: Duo Minions
+    spawnRate: 0.228
+    xRange: {x: -4, y: 4}
+  waveSequence: []
+--- !u!114 &710440547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 710440542}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db91847d27f9b7e45bcaeb1f261bd037, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sectorName: Sprinkled Trees
+  myFormations: {fileID: 710440546}
+  myBossIndex: 0
+  nextSector: {fileID: 710440545}
+  tickPeriod: 1
+  sectorLength: 200
+  position: 0
 --- !u!1 &883805892
 GameObject:
   m_ObjectHideFlags: 0
@@ -1000,8 +910,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 883805892}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1066,7 +976,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1106,7 +1015,7 @@ Camera:
     width: 1
     height: 1
   near clip plane: 0.3
-  far clip plane: 1000
+  far clip plane: 100
   field of view: 60
   orthographic: 0
   orthographic size: 5
@@ -1139,66 +1048,6 @@ Transform:
   m_Father: {fileID: 1171559131}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 33.953, y: 0, z: 0}
---- !u!114 &963194229
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 963194228}
-  volumeLayer:
-    serializedVersion: 2
-    m_Bits: 256
-  stopNaNPropagation: 1
-  finalBlitToCameraTarget: 0
-  antialiasingMode: 0
-  temporalAntialiasing:
-    jitterSpread: 0.75
-    sharpness: 0.25
-    stationaryBlending: 0.95
-    motionBlending: 0.85
-  subpixelMorphologicalAntialiasing:
-    quality: 2
-  fastApproximateAntialiasing:
-    fastMode: 0
-    keepAlpha: 0
-  fog:
-    enabled: 1
-    excludeSkybox: 1
-  debugLayer:
-    lightMeter:
-      width: 512
-      height: 256
-      showCurves: 1
-    histogram:
-      width: 512
-      height: 256
-      channel: 3
-    waveform:
-      exposure: 0.12
-      height: 256
-    vectorscope:
-      size: 256
-      exposure: 0.12
-    overlaySettings:
-      linearDepth: 0
-      motionColorIntensity: 4
-      motionGridSize: 64
-      colorBlindnessType: 0
-      colorBlindnessStrength: 1
-  m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
-  m_ShowCustomSorter: 0
-  breakBeforeColorGrading: 0
-  m_BeforeTransparentBundles: []
-  m_BeforeStackBundles: []
-  m_AfterStackBundles: []
 --- !u!1 &1017607084
 GameObject:
   m_ObjectHideFlags: 0
@@ -1322,8 +1171,8 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1076541944}
   m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
@@ -1430,11 +1279,12 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!223 &1116013818
 Canvas:
   m_ObjectHideFlags: 0
@@ -1476,6 +1326,37 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1144908469
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1144908470}
+  m_Layer: 0
+  m_Name: Biomes
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1144908470
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144908469}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 710440543}
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1171559130
 GameObject:
   m_ObjectHideFlags: 0
@@ -1536,10 +1417,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 653658929}
-  light: {fileID: 446321652}
+  _light: {fileID: 446321652}
   batteryFill: {fileID: 2050143624}
   batteryCapacity: 3.51
   batteryRechargeRate: 2
+  rangeMultiplier: 1.28
+  damageMultiplier: 0
+  powerUpsTime: 10
+  sensitivity: 0.672
 --- !u!1 &1462071921
 GameObject:
   m_ObjectHideFlags: 0
@@ -1551,7 +1436,6 @@ GameObject:
   - component: {fileID: 1462071922}
   - component: {fileID: 1462071925}
   - component: {fileID: 1462071924}
-  - component: {fileID: 1462071923}
   m_Layer: 0
   m_Name: Battery Case
   m_TagString: Untagged
@@ -1573,20 +1457,6 @@ Transform:
   m_Father: {fileID: 139987194}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!136 &1462071923
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1462071921}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1462071924
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1647,7 +1517,6 @@ GameObject:
   - component: {fileID: 1560463340}
   - component: {fileID: 1560463343}
   - component: {fileID: 1560463342}
-  - component: {fileID: 1560463341}
   m_Layer: 0
   m_Name: Light
   m_TagString: Untagged
@@ -1669,20 +1538,6 @@ Transform:
   m_Father: {fileID: 139987194}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!136 &1560463341
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1560463339}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
 --- !u!23 &1560463342
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -1811,16 +1666,16 @@ RectTransform:
   m_GameObject: {fileID: 1846274171}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.9, y: 0.8, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2050143623}
   m_Father: {fileID: 1116013819}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.47300002, y: 0.90400004}
-  m_AnchorMax: {x: 0.53400004, y: 0.952}
-  m_AnchoredPosition: {x: -337.5, y: -291.4}
-  m_SizeDelta: {x: 89.584854, y: 111.62399}
+  m_AnchorMin: {x: 0.048850536, y: 0.133}
+  m_AnchorMax: {x: 0.13800001, y: 0.193423}
+  m_AnchoredPosition: {x: -4.999756, y: 35}
+  m_SizeDelta: {x: 68.58484, y: 108.62399}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1846274173
 MonoBehaviour:
@@ -1836,7 +1691,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1860,67 +1715,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1846274171}
   m_CullTransparentMesh: 1
---- !u!850595691 &1853791753
-LightingSettings:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Settings.lighting
-  serializedVersion: 2
-  m_GIWorkflowMode: 1
-  m_EnableBakedLightmaps: 1
-  m_EnableRealtimeLightmaps: 0
-  m_RealtimeEnvironmentLighting: 1
-  m_BounceScale: 1
-  m_AlbedoBoost: 1
-  m_IndirectOutputScale: 1
-  m_UsingShadowmask: 1
-  m_BakeBackend: 1
-  m_LightmapMaxSize: 1024
-  m_BakeResolution: 40
-  m_Padding: 2
-  m_TextureCompression: 1
-  m_AO: 0
-  m_AOMaxDistance: 1
-  m_CompAOExponent: 1
-  m_CompAOExponentDirect: 0
-  m_ExtractAO: 0
-  m_MixedBakeMode: 2
-  m_LightmapsBakeMode: 1
-  m_FilterMode: 1
-  m_LightmapParameters: {fileID: 0}
-  m_ExportTrainingData: 0
-  m_TrainingDataDestination: TrainingData
-  m_RealtimeResolution: 2
-  m_ForceWhiteAlbedo: 0
-  m_ForceUpdates: 0
-  m_FinalGather: 0
-  m_FinalGatherRayCount: 256
-  m_FinalGatherFiltering: 1
-  m_PVRCulling: 1
-  m_PVRSampling: 1
-  m_PVRDirectSampleCount: 32
-  m_PVRSampleCount: 500
-  m_PVREnvironmentSampleCount: 500
-  m_PVREnvironmentReferencePointCount: 2048
-  m_LightProbeSampleCountMultiplier: 4
-  m_PVRBounces: 2
-  m_PVRRussianRouletteStartBounce: 2
-  m_PVREnvironmentMIS: 0
-  m_PVRFilteringMode: 2
-  m_PVRDenoiserTypeDirect: 0
-  m_PVRDenoiserTypeIndirect: 0
-  m_PVRDenoiserTypeAO: 0
-  m_PVRFilterTypeDirect: 0
-  m_PVRFilterTypeIndirect: 0
-  m_PVRFilterTypeAO: 0
-  m_PVRFilteringGaussRadiusDirect: 1
-  m_PVRFilteringGaussRadiusIndirect: 5
-  m_PVRFilteringGaussRadiusAO: 2
-  m_PVRFilteringAtrousPositionSigmaDirect: 0.5
-  m_PVRFilteringAtrousPositionSigmaIndirect: 2
-  m_PVRFilteringAtrousPositionSigmaAO: 1
 --- !u!1 &2050143622
 GameObject:
   m_ObjectHideFlags: 0
@@ -1948,15 +1742,15 @@ RectTransform:
   m_GameObject: {fileID: 2050143622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.13, y: 1.05, z: 1}
   m_Children: []
   m_Father: {fileID: 1846274172}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.275, y: 0.53000003}
-  m_AnchorMax: {x: 0.78000003, y: 0.75000006}
-  m_AnchoredPosition: {x: -16.975494, y: 22.790005}
-  m_SizeDelta: {x: 62.299995, y: 105.380005}
+  m_AnchorMin: {x: 0.31500003, y: 0.53000003}
+  m_AnchorMax: {x: 0.31500003, y: 0.75000006}
+  m_AnchoredPosition: {x: 0.069999695, y: 24.7}
+  m_SizeDelta: {x: 138.29999, y: 105.380005}
   m_Pivot: {x: 0.315, y: 0.5}
 --- !u!114 &2050143624
 MonoBehaviour:
@@ -1972,7 +1766,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 0.50980395}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:

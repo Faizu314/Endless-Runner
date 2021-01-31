@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class EnemySpawner : MonoBehaviour
@@ -6,87 +7,74 @@ public class EnemySpawner : MonoBehaviour
     private const int POOL_OFFSET_Y = -300;
 
     [SerializeField] private PlayerMovement player;
-    [SerializeField] private int levelLength;
-    [SerializeField] private List<GameObject> enemyPrefabs;
-    [SerializeField] private List<EnemySpawnDetails> enemyDetails;
+    [SerializeField] private List<BiomeSectorManager> biomes;
+    public List<EnemyDetails> enemyDetails;
 
+    [HideInInspector] public bool bossMode = false;
     private List<Queue<GameObject>> idlePools;
     private List<GameObject>[] activeEnemies;
-    private List<int> candidates = new List<int>();
-    private float x = 0f;
-    private bool bossMode = false;
+    private Action bossCallBack;
 
     private void Start()
     {
+        CheckPoint.Load();
+        Debug.Log("Resuming from: " + CheckPoint.progress);
         idlePools = new List<Queue<GameObject>>();
-        activeEnemies = new List<GameObject>[enemyPrefabs.Count];
-        for (int i = 0; i < enemyPrefabs.Count; i++)
+        activeEnemies = new List<GameObject>[enemyDetails.Count];
+        for (int i = 0; i < enemyDetails.Count; i++)
         {
             idlePools.Add(new Queue<GameObject>());
             activeEnemies[i] = new List<GameObject>();
         }
-        if (enemyPrefabs.Count != enemyDetails.Count)
-        {
-            Debug.LogError("Enemy details and prefabs not matching up. Expect loads of errors");
-        }
         
-        for (int i = 0; i < enemyPrefabs.Count; i++)
+        for (int i = 0; i < enemyDetails.Count; i++)
         {
             GameObject child = new GameObject(enemyDetails[i].enemyName + " Pool");
             child.transform.parent = transform;
 
-            if (enemyDetails[i].isBoss)
+            if (enemyDetails[i].enemyPrefab != null)
             {
-                GameObject obj = Instantiate(enemyPrefabs[i], new Vector3(0, POOL_OFFSET_Y, 0), Quaternion.identity);
-                obj.transform.parent = child.transform;
-                idlePools[i].Enqueue(obj);
-            }
-            else
-            {
-                for (int j = 0; j < enemyDetails[i].preferredPoolSize; j++)
+                if (enemyDetails[i].isBoss)
                 {
-                    GameObject obj = Instantiate(enemyPrefabs[i], new Vector3(0, POOL_OFFSET_Y, 0), Quaternion.identity);
+                    GameObject obj = Instantiate(enemyDetails[i].enemyPrefab, new Vector3(0, POOL_OFFSET_Y, 0), Quaternion.identity);
                     obj.transform.parent = child.transform;
                     idlePools[i].Enqueue(obj);
                 }
+                else
+                {
+                    for (int j = 0; j < enemyDetails[i].preferredPoolSize; j++)
+                    {
+                        GameObject obj = Instantiate(enemyDetails[i].enemyPrefab, new Vector3(0, POOL_OFFSET_Y, 0), Quaternion.identity);
+                        obj.transform.parent = child.transform;
+                        idlePools[i].Enqueue(obj);
+                    }
+                }
             }
+            else
+                Debug.Log(enemyDetails[i].enemyName + " Has no prefab provided");
         }
-    }
-
-    private void SpawnRandomCandidate()
-    {
-        if (candidates.Count == 0)
-            return;
-        int index = Random.Range(0, candidates.Count);
-        if (enemyDetails[candidates[index]].isBoss)
-            Spawn(candidates[index], new Vector3(0, 1.69f, player.transform.position.z + 40f));
-        else
-            Spawn(candidates[index], new Vector3(Random.Range(-7f, 7f), 1.69f, player.transform.position.z + 40f));
-        candidates.Remove(candidates[index]);
+        BiomeEnded();
     }
 
     private void Update()
     {
         if (bossMode)
-            return;
-        if (Mathf.Abs(player.transform.position.z - levelLength) < 5)
         {
-            Debug.Log("Mubarakan muk gyeh level");
+            int currentlyActive = 0;
+            for (int i = 0; i < activeEnemies.Length; i++)
+            {
+                currentlyActive += activeEnemies[i].Count;
+            }
+            if (currentlyActive == 1 && bossCallBack != null)
+            {
+                bossCallBack();
+            }
+            else if (currentlyActive == 0)
+            {
+                DisableBossMode();
+            }
             return;
         }
-        SpawnRandomCandidate();
-
-        x += Time.deltaTime;
-        if (x > 1)
-            x = Random.value;
-        else
-            return;
-
-        for (int i = 0; i < enemyDetails.Count; i++)
-            if (x < enemyDetails[i].spawnRates.Evaluate(player.transform.position.z / levelLength))
-                candidates.Add(i);
-
-        x = 0;
     }
 
     public void Despawn(GameObject obj)
@@ -126,22 +114,27 @@ public class EnemySpawner : MonoBehaviour
     public void DisableBossMode()
     {
         bossMode = false;
+        bossCallBack = null;
+        player.Move();
     }
 
-    public List<GameObject> GetEnemyPrefabs()
+    public void SetBossCallBack(Action bossCallBack)
     {
-        return enemyPrefabs;
+        this.bossCallBack = bossCallBack;
     }
 
-    public int GetLevelLength()
+    public void BiomeEnded()
     {
-        return levelLength;
+        int index = UnityEngine.Random.Range(0, biomes.Count);
+        biomes[index].Initialize();
+        biomes[index].enabled = true;
+        CheckPoint.Save(player.transform.position.z + CheckPoint.progress);
     }
 
-    [System.Serializable] private struct EnemySpawnDetails
+    [System.Serializable] public struct EnemyDetails
     {
         public string enemyName;
-        public AnimationCurve spawnRates;
+        public GameObject enemyPrefab;
         public int preferredPoolSize;
         public bool isBoss;
     }

@@ -33,10 +33,16 @@ public class CustomEnemyPositionsEditor : Editor
     {
         DrawDefaultInspector();
 
-        if (EnemyData != null)
+        EditorGUILayout.Space(10);
+        if (EnemyData != null && EnemyData.Length != 0)
         {
             GUI.backgroundColor = Color.grey;
+            EditorGUILayout.LabelField("Enemies");
             x = GUILayout.SelectionGrid(x, EnemyData, CEP.data.Count);
+        }
+        else
+        {
+            EditorGUILayout.LabelField("No Enemies");
         }
 
         GUI.backgroundColor = Color.white;

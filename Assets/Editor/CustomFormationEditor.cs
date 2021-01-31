@@ -67,6 +67,7 @@ public class CustomFormationEditor : Editor
     {
         DrawDefaultInspector();
 
+        EditorGUILayout.Space(10);
         if (GUILayout.Button("Update Member Data"))
         {
             UpdateMemberNames();
@@ -83,7 +84,7 @@ public class CustomFormationEditor : Editor
                 CF.ReviewFormations();
                 editModeEnabled = true;
             }
-            if (CF.randomGeneration)
+            if (CF.mode == CustomFormations.Mode.Random)
             {
                 if (GUILayout.Button("Connect to Spawner"))
                 {
@@ -92,15 +93,24 @@ public class CustomFormationEditor : Editor
             }
             return;
         }
-
-        if (memberNames != null)
+        if (memberNames != null && memberNames.Length != 0)
         {
             GUI.backgroundColor = Color.grey;
+            EditorGUILayout.LabelField("Members");
             memberSelected = GUILayout.SelectionGrid(memberSelected, memberNames, CF.memberData.Count);
         }
-        if (formationNames != null)
+        else
         {
+            EditorGUILayout.LabelField("No Members");
+        }
+        if (formationNames != null && formationNames.Length != 0)
+        {
+            EditorGUILayout.LabelField("Formations");
             formationSelected = GUILayout.SelectionGrid(formationSelected, formationNames, 4);
+        }
+        else
+        {
+            EditorGUILayout.LabelField("No Formations Added");
         }
 
         GUI.backgroundColor = Color.white;
@@ -130,6 +140,13 @@ public class CustomFormationEditor : Editor
                 if (GUILayout.Button("Save Formation"))
                 {
                     CF.SaveFormation(formationSelected);
+                }
+                if (CF.mode == CustomFormations.Mode.Sequence)
+                {
+                    if (GUILayout.Button("Add to Sequence"))
+                    {
+                        CF.AddToSequence(formationSelected);
+                    }
                 }
             }
             else
