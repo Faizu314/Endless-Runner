@@ -3,10 +3,11 @@ using System.Collections;
 
 public class EnemyMovement : MonoBehaviour
 {
-    [SerializeField] [Range(1, 5)] private float MovementSpeed;
     [SerializeField] [Range(0.1f, 0.5f)] private float frequency;
     [SerializeField] private AnimationCurve bobCurve;
+    [Range(1, 5)] public float movementSpeed;
 
+    [HideInInspector] public float currentMovementSpeed;
     private Transform target;
     private bool hasSpawnRoutineEnded = false;
     private bool hasSpawned = false;
@@ -14,6 +15,7 @@ public class EnemyMovement : MonoBehaviour
     private void Awake()
     {
         target = GameObject.Find("Buddi").transform;
+        currentMovementSpeed = movementSpeed;
     }
 
     private IEnumerator Spawn(float targetY)
@@ -66,12 +68,12 @@ public class EnemyMovement : MonoBehaviour
         }
 
         Vector3 movementBob = Vector3.zero;
-        float currentMovementSpeed = MovementSpeed + (Mathf.Abs(currentHeight) * MovementSpeed);
+        float imageSpeed = currentMovementSpeed * (1 + Mathf.Abs(currentHeight));
         movementBob.y = 1 + Mathf.Abs(currentHeight) * 0.5f;
         movementBob.x = transform.position.x + currentHeight * 0.002f;
         movementBob.z = transform.position.z;
 
-        transform.position = Vector3.MoveTowards(transform.position, movementBob + transform.forward, currentMovementSpeed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, movementBob + transform.forward, imageSpeed * Time.deltaTime);
 
         Vector3 rotationBob = Vector3.zero;
         rotationBob.x = -xRotation * 8f;

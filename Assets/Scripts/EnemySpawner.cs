@@ -14,6 +14,8 @@ public class EnemySpawner : MonoBehaviour
     private List<Queue<GameObject>> idlePools;
     private List<GameObject>[] activeEnemies;
     private Action bossCallBack;
+    private int currentBossIndex;
+    private bool bossPresent = false;
 
     private void Start()
     {
@@ -53,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
             else
                 Debug.Log(enemyDetails[i].enemyName + " Has no prefab provided");
         }
-        BiomeEnded();
+        Resume();
     }
 
     private void Update()
@@ -65,15 +67,26 @@ public class EnemySpawner : MonoBehaviour
             {
                 currentlyActive += activeEnemies[i].Count;
             }
-            if (currentlyActive == 1 && bossCallBack != null)
+            if (bossPresent)
             {
-                bossCallBack();
+                if (currentlyActive == 1 && bossCallBack != null)
+                {
+                    bossCallBack();
+                }
+                else if (currentlyActive == 0)
+                {
+                    DisableBossMode();
+                }
             }
             else if (currentlyActive == 0)
             {
-                DisableBossMode();
+                player.Stop();
+                GameObject obj = idlePools[currentBossIndex].Dequeue();
+                activeEnemies[currentBossIndex].Add(obj);
+                obj.transform.position = player.transform.position + Vector3.forward * 40f;
+                obj.SetActive(true);
+                bossPresent = true;
             }
-            return;
         }
     }
 
@@ -102,8 +115,10 @@ public class EnemySpawner : MonoBehaviour
         }
         if (enemyDetails[index].isBoss)
         {
-            player.Stop();
+            //player.Stop();
             bossMode = true;
+            currentBossIndex = index;
+            return;
         }
         GameObject obj = idlePools[index].Dequeue();
         activeEnemies[index].Add(obj);
@@ -114,7 +129,9 @@ public class EnemySpawner : MonoBehaviour
     public void DisableBossMode()
     {
         bossMode = false;
+        bossPresent = false;
         bossCallBack = null;
+        currentBossIndex = -1;
         player.Move();
     }
 
@@ -123,12 +140,19 @@ public class EnemySpawner : MonoBehaviour
         this.bossCallBack = bossCallBack;
     }
 
-    public void BiomeEnded()
+    public void InitiateRandomBiome()
     {
         int index = UnityEngine.Random.Range(0, biomes.Count);
         biomes[index].Initialize();
         biomes[index].enabled = true;
-        CheckPoint.Save(player.transform.position.z + CheckPoint.progress);
+        CheckPoint.Save(player.transform.position.z + CheckPoint.progress, index);
+    }
+
+    public void Resume()
+    {
+        int lastBiome = CheckPoint.currentBiome;
+        biomes[lastBiome].Initialize();
+        biomes[lastBiome].enabled = true;
     }
 
     [System.Serializable] public struct EnemyDetails

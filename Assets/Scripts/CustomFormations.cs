@@ -39,6 +39,7 @@ public class CustomFormations : MonoBehaviour
             next = -1;
         else
             next = 0;
+        ConnectToSpawner();
     }
 
     private void SpawnRandomCandidate()
@@ -110,10 +111,13 @@ public class CustomFormations : MonoBehaviour
         }
         if (formationSpawnRates == null)
             formationSpawnRates = new List<FormationSpawnDetails>();
+        List<FormationSpawnDetails> copy = new List<FormationSpawnDetails>(formationSpawnRates);
         formationSpawnRates.Clear();
         for (int i = 0; i < formations.Count; i++)
         {
             FormationSpawnDetails temp = new FormationSpawnDetails(formations[i].name, formations[i].GetRange());
+            if (i < copy.Count)
+                temp.spawnRate = copy[i].spawnRate;
             formationSpawnRates.Add(temp);
         }
     }
@@ -415,7 +419,9 @@ public class CustomFormations : MonoBehaviour
                 if (member.position.x > maxX)
                     maxX = member.position.x;
             }
-            return new Vector2(-10f - minX, 10f - maxX);
+            if (minX < -4f || maxX > 4f)
+                return Vector2.zero;
+            return new Vector2(-4f - minX, 4f - maxX);
         }
         public List<Member> GetMembers()
         {

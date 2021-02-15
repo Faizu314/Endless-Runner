@@ -257,7 +257,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389bfa74179564a4abc7367fa08498d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MovementSpeed: 2.34
+  movementSpeed: 1.8
   frequency: 0.2
   bobCurve:
     serializedVersion: 2
@@ -310,6 +310,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  currentMovementSpeed: 0
 --- !u!114 &8379322852849484388
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -28,6 +28,7 @@ public class EnemyCollision : MonoBehaviour
         {
             currentHealth -= Time.fixedDeltaTime * SwipeControl.playerDamage;
             myCopyOfMaterial.SetColor("_EmissionColor", Color.white);
+            enemyMovement.currentMovementSpeed = enemyMovement.movementSpeed * 0.75f;
             if (currentHealth <= 0)
                 InflictDeath();
         }
@@ -36,6 +37,7 @@ public class EnemyCollision : MonoBehaviour
     private void FixedUpdate()
     {
         myCopyOfMaterial.SetColor("_EmissionColor", Color.clear);
+        enemyMovement.currentMovementSpeed = enemyMovement.movementSpeed;
     }
 
     private void InflictDeath()

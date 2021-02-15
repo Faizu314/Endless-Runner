@@ -7,14 +7,17 @@ public class PowerupSpawner : MonoBehaviour
 
     [SerializeField] private List<Powerup> powerups;
     [SerializeField] private Transform player;
+    [SerializeField] private float tickPeriod;
 
     private List<Queue<GameObject>> idlePowerups;
     private List<GameObject>[] activePowerups;
+    private EnemySpawner enemySpawner;
     private List<int> candidates = new List<int>();
     float x = 0f;
 
     void Start()
     {
+        enemySpawner = GameObject.Find("Level Designer").GetComponent<EnemySpawner>();
         idlePowerups = new List<Queue<GameObject>>();
         activePowerups = new List<GameObject>[powerups.Count];
         for (int i = 0; i < powerups.Count; i++)
@@ -45,13 +48,13 @@ public class PowerupSpawner : MonoBehaviour
         int index = Random.Range(0, candidates.Count);
         if (idlePowerups[index].Count == 0)
         {
-            Debug.Log("Pool of Power Up " + powerups[index].name + " depleted");
+            Debug.Log("Pool of Power Up " + powerups[candidates[index]].name + " depleted");
             return;
         }
-        GameObject spawn = idlePowerups[index].Dequeue();
-        activePowerups[index].Add(spawn);
+        GameObject spawn = idlePowerups[candidates[index]].Dequeue();
+        activePowerups[candidates[index]].Add(spawn);
         spawn.SetActive(true);
-        spawn.transform.position = new Vector3(Random.Range(-6, 6), -0.5f, player.position.z + 40f);
+        spawn.transform.position = new Vector3(Random.Range(-4, 4), -0.5f, player.position.z + 40f);
         candidates.Clear();
     }
 
@@ -71,8 +74,10 @@ public class PowerupSpawner : MonoBehaviour
 
     void Update()
     {
+        if (enemySpawner.bossMode)
+            return;
         x += Time.deltaTime;
-        if (x < 10)
+        if (x < tickPeriod)
             return;
         x = Random.value;
         for (int i = 0; i < powerups.Count; i++)
@@ -86,7 +91,7 @@ public class PowerupSpawner : MonoBehaviour
     {
         public string name;
         public GameObject prefab;
-        public float spawnRate;
+        [Range(0, 1)] public float spawnRate;
         public int poolSize;
     }
 }

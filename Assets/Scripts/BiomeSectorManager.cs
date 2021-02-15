@@ -68,20 +68,20 @@ public class BiomeSectorManager : MonoBehaviour
             }
             else if (position == Position.Transitioning_Boss)
             {
-                enemySpawner.Spawn(myBossIndex, player.position + Vector3.forward * 40f);
+                enemySpawner.Spawn(myBossIndex, Vector3.zero);
                 nextSector.Initialize();
                 nextSector.enabled = true;
                 enabled = false;
             }
             else if (position == Position.Last)
             {
-                enemySpawner.BiomeEnded();
+                enemySpawner.InitiateRandomBiome();
                 enabled = false;
             }
             else
             {
-                enemySpawner.Spawn(myBossIndex, player.position + Vector3.forward * 40f);
-                enemySpawner.BiomeEnded();
+                enemySpawner.Spawn(myBossIndex, Vector3.zero);
+                enemySpawner.InitiateRandomBiome();
                 enabled = false;
             }
         }
