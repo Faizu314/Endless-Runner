@@ -5,6 +5,7 @@ public class EnemyCollision : MonoBehaviour
     [SerializeField] private Material material;
     [SerializeField] private MeshRenderer meshRenderer;
     [SerializeField] private float health;
+    [SerializeField] [Range(0.1f, 0.9f)] private float resistance;
 
     private EnemySpawner enemySpawner;
     private EnemyMovement enemyMovement;
@@ -28,7 +29,7 @@ public class EnemyCollision : MonoBehaviour
         {
             currentHealth -= Time.fixedDeltaTime * SwipeControl.playerDamage;
             myCopyOfMaterial.SetColor("_EmissionColor", Color.white);
-            enemyMovement.currentMovementSpeed = enemyMovement.movementSpeed * 0.75f;
+            enemyMovement.currentMovementSpeed = enemyMovement.movementSpeed * resistance;
             if (currentHealth <= 0)
                 InflictDeath();
         }
