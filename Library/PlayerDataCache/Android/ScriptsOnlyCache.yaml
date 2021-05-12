@@ -83,37 +83,37 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 2190}
     - Class: 114
-      Script: {instanceID: 2220}
+      Script: {instanceID: 2222}
     - Class: 114
-      Script: {instanceID: 2282}
-    - Class: 114
-      Script: {instanceID: 2316}
+      Script: {instanceID: 2284}
     - Class: 114
       Script: {instanceID: 2318}
     - Class: 114
-      Script: {instanceID: 2386}
+      Script: {instanceID: 2320}
     - Class: 114
-      Script: {instanceID: 2400}
+      Script: {instanceID: 2388}
     - Class: 114
-      Script: {instanceID: 2776}
+      Script: {instanceID: 2402}
     - Class: 114
-      Script: {instanceID: 2820}
+      Script: {instanceID: 2778}
     - Class: 114
-      Script: {instanceID: 2968}
+      Script: {instanceID: 2822}
     - Class: 114
-      Script: {instanceID: 2994}
+      Script: {instanceID: 2970}
     - Class: 114
       Script: {instanceID: 2996}
     - Class: 114
-      Script: {instanceID: 3044}
+      Script: {instanceID: 2998}
     - Class: 114
-      Script: {instanceID: 3214}
+      Script: {instanceID: 3046}
     - Class: 114
-      Script: {instanceID: 3338}
+      Script: {instanceID: 3216}
     - Class: 114
-      Script: {instanceID: 3540}
+      Script: {instanceID: 3340}
     - Class: 114
-      Script: {instanceID: 3796}
+      Script: {instanceID: 3542}
+    - Class: 114
+      Script: {instanceID: 3798}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -158,23 +158,23 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1756}
     - Class: 114
-      Script: {instanceID: 2318}
+      Script: {instanceID: 2206}
     - Class: 114
-      Script: {instanceID: 2776}
+      Script: {instanceID: 2320}
     - Class: 114
-      Script: {instanceID: 2968}
+      Script: {instanceID: 2778}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 2970}
     - Class: 114
       Script: {instanceID: 3214}
     - Class: 114
-      Script: {instanceID: 3540}
+      Script: {instanceID: 3216}
     - Class: 114
-      Script: {instanceID: 3688}
+      Script: {instanceID: 3542}
     - Class: 114
-      Script: {instanceID: 3744}
+      Script: {instanceID: 3690}
     - Class: 114
-      Script: {instanceID: 26154}
+      Script: {instanceID: 3746}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -398,13 +398,19 @@ ScriptsOnlyBuild:
     className: CustomFormations
   - hash:
       serializedVersion: 2
+      Hash: 17eb458e207765c11be8cd5cb5e4f789
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: DeletePlayerPrefs
+  - hash:
+      serializedVersion: 2
       Hash: a81d4c2c1cf3ad164d277d927a193679
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: Dropdown
   - hash:
       serializedVersion: 2
-      Hash: c39859fc76cd649e2369f22a4c3242d1
+      Hash: 2c6b568fa4408fc11f1168c3fccf6f18
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EndlessPath
@@ -464,7 +470,7 @@ ScriptsOnlyBuild:
     className: EnemyMovement
   - hash:
       serializedVersion: 2
-      Hash: 7f9cfbae7352256342dc7295bbf04061
+      Hash: 30980013a581443766d991864a60b84e
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyCollision
@@ -822,15 +828,8 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Postprocessing.Runtime.dll
     namespaceName: UnityEngine.Rendering.PostProcessing
     className: AmbientOcclusion
-  - hash:
-      serializedVersion: 2
-      Hash: 17eb458e207765c11be8cd5cb5e4f789
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: DeletePlayerPrefs
   platform: 13
   scenePathNames:
   - Assets/Scenes/Menu.unity
   - Assets/Scenes/Endless.unity
-  playerPath: C:/Users/faiza/OneDrive/Desktop/trash/MyGames/Endless Runner Build
-    Android/EndlessRunner.apk
+  playerPath: C:/Users/faiza/Desktop/trash/MyGames/Endless Runner Build Android/EndlessRunner.apk

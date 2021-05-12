@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class EnemySpawner : MonoBehaviour
 {
     private const int POOL_OFFSET_Y = -300;
+    public const int LEFT_BOUNDARY = -4;
+    public const int RIGHT_BOUNDARY = 4;
 
     [SerializeField] private PlayerMovement player;
     [SerializeField] private List<BiomeSectorManager> biomes;

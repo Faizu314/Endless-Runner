@@ -6,7 +6,7 @@ public class EndlessPath : MonoBehaviour
     private const float POOL_OFFSET_Y = -250f;
 
     [SerializeField] private GameObject[] pathPrefabs;
-    [SerializeField] private float pathWidthInUnits;
+    [SerializeField] private float pathLengthInUnits;
     [SerializeField] private int concurrentPaths;
     [SerializeField] private Transform player;
 
@@ -34,7 +34,7 @@ public class EndlessPath : MonoBehaviour
         }
 
         for (int i = 0; i < concurrentPaths; i++)
-            SpawnPath(Vector3.forward * pathWidthInUnits * i);
+            SpawnPath(Vector3.forward * pathLengthInUnits * i);
     }
 
     private void Update()
@@ -42,10 +42,10 @@ public class EndlessPath : MonoBehaviour
         for (int i = 0; i < activePathsIndex.Count; i++)
         {
             float currentPathZ = pathsPool[activePathsIndex[i]].transform.position.z;
-            if (player.transform.position.z - currentPathZ > pathWidthInUnits / 2f + 5f)
+            if (player.transform.position.z - currentPathZ > pathLengthInUnits / 2f + 5f)
             {
                 DespawnPath(i);
-                SpawnPath(Vector3.forward * (currentPathZ + concurrentPaths * pathWidthInUnits));
+                SpawnPath(Vector3.forward * (currentPathZ + concurrentPaths * pathLengthInUnits));
                 break;
             }
         }

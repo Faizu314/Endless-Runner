@@ -419,9 +419,9 @@ public class CustomFormations : MonoBehaviour
                 if (member.position.x > maxX)
                     maxX = member.position.x;
             }
-            if (minX < -4f || maxX > 4f)
+            if (minX <= EnemySpawner.LEFT_BOUNDARY && maxX >= EnemySpawner.RIGHT_BOUNDARY)
                 return Vector2.zero;
-            return new Vector2(-4f - minX, 4f - maxX);
+            return new Vector2(EnemySpawner.LEFT_BOUNDARY - minX, EnemySpawner.RIGHT_BOUNDARY - maxX);
         }
         public List<Member> GetMembers()
         {
